@@ -1,7 +1,7 @@
 import { createContext, useContext, useMemo, useReducer, useState } from "react"
 import { applyDelta, Event, hydrateClientStorage, useEventLoop, refs } from "$/utils/state.js"
 
-export const initialState = {"reflex___state____state": {"is_hydrated": false, "router": {"session": {"client_token": "", "client_ip": "", "session_id": ""}, "headers": {"host": "", "origin": "", "upgrade": "", "connection": "", "cookie": "", "pragma": "", "cache_control": "", "user_agent": "", "sec_websocket_version": "", "sec_websocket_key": "", "sec_websocket_extensions": "", "accept_encoding": "", "accept_language": ""}, "page": {"host": "", "path": "", "raw_path": "", "full_path": "", "full_raw_path": "", "params": {}}}}, "reflex___state____state.reflex___state____on_load_internal_state": {}, "reflex___state____state.reflex_chat___state____state": {"api_key": "024d8423032d4e45985d7ca86d42e3f5", "chat_history": [], "deployment_name": "genai-gpt-35-turbo-16k", "endpoint": "https://genai-openai-fr.openai.azure.com/", "is_button_disabled": true, "question": "", "version": "2024-06-01"}, "reflex___state____state.reflex___state____update_vars_internal_state": {}, "reflex___state____state.reflex___state____frontend_event_exception_state": {}}
+export const initialState = {"reflex___state____state": {"is_hydrated": false, "router": {"session": {"client_token": "", "client_ip": "", "session_id": ""}, "headers": {"host": "", "origin": "", "upgrade": "", "connection": "", "cookie": "", "pragma": "", "cache_control": "", "user_agent": "", "sec_websocket_version": "", "sec_websocket_key": "", "sec_websocket_extensions": "", "accept_encoding": "", "accept_language": ""}, "page": {"host": "", "path": "", "raw_path": "", "full_path": "", "full_raw_path": "", "params": {}}}}, "reflex___state____state.reflex___state____on_load_internal_state": {}, "reflex___state____state.reflex_chat___state____state": {"api_key": "024d8423032d4e45985d7ca86d42e3f5", "chat_history": [], "deployment_name": "genai-gpt-35-turbo-16k", "endpoint": "https://genai-openai-fr.openai.azure.com/", "is_button_disabled": true, "question": "", "selected_value": "apple", "version": "2024-06-01"}, "reflex___state____state.reflex___state____update_vars_internal_state": {}, "reflex___state____state.reflex___state____frontend_event_exception_state": {}}
 
 export const defaultColorMode = "system"
 export const ColorModeContext = createContext(null);
@@ -52,7 +52,7 @@ export const initialEvents = () => [
 
 export const isDevMode = true
 
-export const lastCompiledTimeStamp = "2025-01-09 16:24:56.342542"
+export const lastCompiledTimeStamp = "2025-01-14 14:35:46.003131"
 
 export function UploadFilesProvider({ children }) {
   const [filesById, setFilesById] = useState({})

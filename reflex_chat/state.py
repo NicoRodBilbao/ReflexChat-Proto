@@ -15,6 +15,8 @@ class State(rx.State):
 
     question: str
 
+    selected_value: str = "apple"
+
     chat_history: list[tuple[str, str]] = []
 
     @rx.var
@@ -26,13 +28,25 @@ class State(rx.State):
     async def on_key_press(self, event):
         if str(event) == "Enter":
             async for _ in self.answer():
+                yield
                 pass
+
+    @rx.event
+    def change_selection(self, selected_value: str):
+        """Change the select value var."""
+        self.selected_value = selected_value
 
     @rx.event
     async def answer(self):
         answer = "I don't know!"
 
         if self.question != "":
+            # Add the user's question to the chat history first
+            self.chat_history.append((self.question, ""))
+            question = self.question
+            self.question = ""
+            yield
+
             llm = AzureChatOpenAI(
                 deployment_name=self.deployment_name,
                 openai_api_key=self.api_key,
@@ -41,21 +55,18 @@ class State(rx.State):
                 base_url=None
             )
             try:
-                response = await llm([HumanMessage(content=self.question)])
+                response = llm([HumanMessage(content=question)])
                 answer = response.content
             except Exception as e:
                 print(e)
             
-            self.chat_history.append((self.question, ""))
-            self.question = ""
             yield
 
             for i in range(len(answer)):
                 await asyncio.sleep(0.01)
                 self.chat_history[-1] = (
                     self.chat_history[-1][0], 
-                    answer[:i +1]
+                    answer[:i + 1]
                 )
+                rx.call_script("scrollToBottom")
                 yield
-
-    

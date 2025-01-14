@@ -32,11 +32,10 @@ def action_bar() -> rx.Component:
         rx.input(
             value=State.question,
             placeholder="Type your message here...", 
-            style=style.input_style,
+            style={**style.input_style, "background_color": "rgba(255, 255, 255, 0.1)", "color": "white"},  
             width="60%",
             on_change=State.set_question,
             on_key_down=State.on_key_press,
-            
         ),
         rx.button(
             "Send",
@@ -66,23 +65,70 @@ def action_bar() -> rx.Component:
         width="100%",
     )
 
+def sidebar() -> rx.Component:
+    return rx.box(
+        rx.select(
+            ["apple", "grape", "pear"],
+            value=State.selected_value,
+            on_change=State.change_selection,
+        ),
+        position="fixed", 
+        left="0",
+        top="0",
+        height="100%",
+        width="15%",
+        background_color="rgba(30, 30, 30, 0.9)",
+        padding="1em",
+        box_shadow="2px 0 5px rgba(0, 0, 0, 0.5)",
+        z_index="1000",
+    )
+
+def register_scroll_script() -> rx.Component:
+    return rx.script(
+        """
+        (function(){function scrollToBottom() {
+            console.log('Scrolling to bottom...');
+            window.scrollTo(0, document.body.scrollHeight);
+        }})
+        """,
+        class_name="css-2x5x1l",
+        data_nscript="afterInteractive"
+    )
+
 def index() -> rx.Component:
     return rx.container(
+        register_scroll_script(),
+        sidebar(),
         chat(),
         rx.box(
-            action_bar(),
+            rx.box(
+                action_bar(),
+                position="fixed",
+                bottom="0",
+                width="50%",
+                display="flex",
+                left="50%",
+                transform="translateX(-50%)",
+                justify_content="center",
+                padding="1em",
+                box_shadow="0 0px 0px rgba(0, 0, 0, 0.1)",
+                background_color="rgba(30, 30, 30)",
+                align_items="center",
+                border_radius="1em",
+            ),
             position="fixed",
             bottom="0",
-            width="50%",
+            width="100%",
+            height="12%",
             display="flex",
             left="50%",
             transform="translateX(-50%)",
             justify_content="center",
             padding="1em",
-            box_shadow="0 0px 0px rgba(0, 0, 0, 0.1)",
-            background_color="rgba(30, 30, 30)",
-            align_items="center",
-            border_radius="1em",  # Added border radius to make the borders round
+            background_color="rgba(17, 17, 19)",
         ),
         align_items="center",
+        background_color="rgba(17, 17, 19)",
+        min_height="100vh",
+        padding_bottom="5em",
     )
