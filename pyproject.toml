@@ -6,7 +6,10 @@ authors = ["Nicolas"]
 readme = "README.md"
 
 [tool.poetry.dependencies]
-python = "^3.13"
+python = "^3.12"
+azure-core = "1.32.0"
+langchain-community = "0.3.14"
+reflex = "0.6.7"
 
 
 [build-system]
